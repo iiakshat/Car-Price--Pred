@@ -93,12 +93,14 @@ o.configure(width=150)
 o.grid(row=6,column=1, columnspan=2, pady=1)
 
 def fetch():
-    t = {"Automatic" : 0, "Manual" : 1}
-    f = {"CNG" :0, "Petrol" : 1, "Diesel" : 2, "LPG" : 3, "Electric" : 4}
+    t = {"Automatic" : 1, "Manual" : 0}
+    f = {"CNG" :2, "Petrol" : 4, "Diesel" : 3, "LPG" : 1, "Electric" : 0}
     oe ={"First" :0, "Second" : 1, "Third" : 2, "Fourth & Above" : 3}
+    # (6500000, 5998, 33.54, 560.0)
     yv = y.get()
     if int(yv)>1500: yv = 2023-int(yv)
-    l = [yv, int(kt.get()), int(f[fue.get()]),int(t[tra.get()]), int(oe[own.get()]), float(po.get()), float(mi.get()), int(e.get())]
+    l = [yv, int(kt.get())/6500000, int(f[fue.get()]), int(t[tra.get()]), 
+        int(oe[own.get()]), float(po.get())/560.0 , float(mi.get())/33.54, int(e.get())/5998]
     l = con([l])
     pred = model.predict(l)
     pred= pred[0]
